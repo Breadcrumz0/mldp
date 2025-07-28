@@ -18,7 +18,7 @@ st.markdown("""
         }
 
         .stApp {
-            background-image: url('https://i.imgur.com/yqJpq0W.jpg'); /* Use your own cloud image URL or upload in Streamlit */
+            background-image: url('https://clouds.jpg'); 
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
