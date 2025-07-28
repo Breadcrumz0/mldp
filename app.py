@@ -3,10 +3,8 @@ import pandas as pd
 import numpy as np
 import joblib
 
-# Load model
 model = joblib.load("weather_model.pkl")
 
-# Custom CSS styling
 st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
@@ -50,10 +48,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Title
 st.markdown('<div class="title">Weather Prediction</div>', unsafe_allow_html=True)
 
-# Input columns (2-column grid)
 col1, col2 = st.columns(2)
 
 with col1:
@@ -70,7 +66,6 @@ with col2:
     cloud_cover = st.selectbox("Cloud Cover", ["Clear", "Partly Cloudy", "Cloudy", "Overcast"])
     season = st.selectbox("Season", ["Spring", "Summer", "Autumn", "Winter"])
 
-# Create input dataframe
 input_dict = {
     "temperature": temperature,
     "humidity": humidity,
@@ -87,7 +82,6 @@ input_df = pd.DataFrame([input_dict])
 input_df = pd.get_dummies(input_df, columns=["cloud_cover", "season"])
 input_df = input_df.reindex(columns=model.feature_names_in_, fill_value=0)
 
-# Predict
 if st.button("Predict Weather"):
     prediction = model.predict(input_df)[0]
     weather_labels = {
