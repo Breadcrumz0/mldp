@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import base64
 
 model = joblib.load("weather_model.pkl")
 
@@ -12,13 +13,13 @@ st.markdown("""
         .title {
             font-family: 'Pacifico', cursive;
             font-size: 3.2rem;
-            color: #77cef0;
+            color: white;
             text-align: center;
             margin-bottom: 20px;
         }
 
         .stApp {
-            background-image: url('https://clouds.jpg'); 
+            background-image: url('');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -49,6 +50,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="title">Weather Prediction</div>', unsafe_allow_html=True)
+# set background image from folder
+st.markdown('<style>.stApp {background-image: url("data:clouds.jpg;base64,' + base64.b64encode(open("clouds.jpg", "rb").read()).decode() + '");}</style>', unsafe_allow_html=True)
 
 col1, col2 = st.columns(2)
 
@@ -57,6 +60,7 @@ with col1:
     humidity = st.number_input("Humidity (%)")
     wind_speed = st.number_input("Wind Speed (km/h)")
     precipitation = st.number_input("Precipitation (%)")
+    season = st.selectbox("Season", ["Spring", "Summer", "Autumn", "Winter"])
 
 with col2:
     pressure = st.number_input("Atmospheric Pressure (hPa)")
@@ -64,7 +68,6 @@ with col2:
     visibility = st.number_input("Visibility (km)")
 
     cloud_cover = st.selectbox("Cloud Cover", ["Clear", "Partly Cloudy", "Cloudy", "Overcast"])
-    season = st.selectbox("Season", ["Spring", "Summer", "Autumn", "Winter"])
 
 input_dict = {
     "temperature": temperature,
