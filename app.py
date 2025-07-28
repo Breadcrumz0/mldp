@@ -91,10 +91,10 @@ input_df = input_df.reindex(columns=model.feature_names_in_, fill_value=0)
 if st.button("Predict Weather"):
     prediction = model.predict(input_df)[0]
     weather_labels = {
-        0: "☀️ Sunny",
-        1: "🌧️ Rainy",
-        2: "❄️ Snowy",
-        3: "☁️ Cloudy"
+        0: "Sunny",
+        1: "Rainy",
+        2: "Snowy",
+        3: "Cloudy"
     }
     result = weather_labels.get(prediction, str(prediction))
     st.markdown(f'<div class="result">Prediction: <strong>{result}</strong></div>', unsafe_allow_html=True)
